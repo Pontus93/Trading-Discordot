@@ -79,7 +79,7 @@ client.on('message', msg => {
     if (msg.content === "?karin") {
         msg.channel.send(karin)
     }
-    if (msg.content === "?Ylva") {
+    if (msg.content === "?ylva") {
         msg.channel.send("Du menar Ylva med hyllan?")
     }
 })
