@@ -79,8 +79,9 @@ client.on('message', msg => {
     if (msg.content === "?karin") {
         msg.channel.send(karin)
     }
+    if (msg.content === "?Ylva") {
+        msg.channel.send("Du menar Ylva med hyllan?")
+    }
 })
 
 client.login(process.env.BOT_TOKEN)
-
-
