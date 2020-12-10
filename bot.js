@@ -31,9 +31,9 @@ client.on('message', msg => {
         let specialGirl = boratsGirls[Math.floor(Math.random() * boratsGirls.length)];
         msg.channel.send("Klart man har tjej, hon heter " + specialGirl + " och gillar åka i min fiat uno")
     }
-    if (msg.content === "?aktie") {
+    if (msg.content === "?aktie-cert") {
         let stockRandom = bullBear[Math.floor(Math.random() * bullBear.length)];
-        msg.channel.send("köp" + stockRandom + "för i helvetes rabarber!")
+        msg.channel.send("köp " + stockRandom + " för i helvetes rabarber!")
     }
     if (msg.content === "borat") {
         msg.channel.send("Va? vad säger du mitt namn för? jag är inte så intressant!")
