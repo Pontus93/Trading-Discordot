@@ -24,11 +24,18 @@ client.on('message', async msg => {
     }
 });
 
+message.member.voice.channel
 // Random silly msgs for friends.
 client.on('message', msg => {
 
     if (msg.content === "?radio") {
-        message.member.voice.channel.join();
+        message.member.voiceChannel.join()
+            .then(connection => { // Connection is an instance of VoiceConnection
+                message.reply('I have successfully connected to the channel!');
+            })
+            .catch(console.log);
+    } else {
+        message.reply('You need to join a voice channel first!');
     }
     if (msg.content === "?borat") {
         msg.channel.send(botInfo)
