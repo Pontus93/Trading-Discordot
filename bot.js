@@ -7,10 +7,12 @@ const boratsGirls = ["nikki", "angelique", "filippa", "jessica", "Emily", "Hanna
 const botInfo = "Lär känna dina vänner skriv ? + pontus,johan,stefan,conny,kjellin,matteo,jeff,fk EXEMPEL: ?pontus, vill du lära känna mig? hm kanske du vill kolla om jag har en dejt ikväll med ?borat-dejt, annars ?joke så skickar Chuck Norris ner något kul från Hollywood!";
 const bullBear = ["Bear-cert!", "Bull-cert!"]
 const karin = "KAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAARIN!"
-// 
+
 client.on("ready", () => {
     console.log("The bot is up & running");
 })
+
+
 
 // Chuck Norris joke api. 
 client.on('message', async msg => {
@@ -24,6 +26,10 @@ client.on('message', async msg => {
 
 // Random silly msgs for friends.
 client.on('message', msg => {
+
+    if (msg.content === "?radio") {
+        message.member.voice.channel.join();
+    }
     if (msg.content === "?borat") {
         msg.channel.send(botInfo)
     }
@@ -83,5 +89,8 @@ client.on('message', msg => {
         msg.channel.send("Du menar Ylva med hyllan?")
     }
 })
+
+
+
 
 client.login(process.env.BOT_TOKEN)
