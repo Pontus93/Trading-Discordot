@@ -12,8 +12,6 @@ client.on("ready", () => {
     console.log("The bot is up & running");
 })
 
-
-
 // Chuck Norris joke api. 
 client.on('message', async msg => {
     if (msg.content === '?joke') {
@@ -24,13 +22,12 @@ client.on('message', async msg => {
     }
 });
 
-message.member.voice.channel
 // Random silly msgs for friends.
 client.on('message', msg => {
 
     if (msg.content === "?radio") {
         message.member.voiceChannel.join()
-            .then(connection => { // Connection is an instance of VoiceConnection
+            .then(connection => {
                 message.reply('I have successfully connected to the channel!');
             })
             .catch(console.log);
@@ -94,8 +91,5 @@ client.on('message', msg => {
         msg.channel.send("Du menar Ylva med hyllan?")
     }
 })
-
-
-
 
 client.login(process.env.BOT_TOKEN)
