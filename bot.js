@@ -34,8 +34,6 @@ client.on('message', msg => {
                 message.reply('I have successfully connected to the channel!');
             })
             .catch(console.log);
-    } else {
-        message.reply('You need to join a voice channel first!');
     }
     if (msg.content === "?borat") {
         msg.channel.send(botInfo)
