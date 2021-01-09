@@ -28,6 +28,8 @@ client.on('message', async msg => {
         const currency = await response.json();
         let btnUS = currency.USD;
         msg.channel.send("US$ " + btnUS);
+        msg.channel.send("SEK: " + btnSEK + ":-");
+
     }
 });
 
