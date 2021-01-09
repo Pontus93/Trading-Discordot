@@ -11,7 +11,7 @@ client.on("ready", () => {
 })
 
 // Chuck Norris joke api. 
-client.on('message', async msg => {
+/*client.on('message', async msg => {
     if (msg.content === '?joke') {
         const response = await fetch("https://api.chucknorris.io/jokes/random");
         const fact = await response.json();
@@ -19,6 +19,7 @@ client.on('message', async msg => {
         msg.channel.send(chuck)
     }
 });
+*/
 
 // Btn api.
 client.on('message', async msg => {
