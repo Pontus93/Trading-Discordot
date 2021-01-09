@@ -28,8 +28,8 @@ client.on('message', async msg => {
         const currency = await response.json();
         let btnUS = currency.USD;
         let btnSEK = currency.SEK;
-        msg.channel.send("USA: " + btnUS + "$");
-        msg.channel.send("SWE: " + btnSEK + "kr");
+        msg.channel.send("usa: " + btnUS + " $");
+        msg.channel.send("swe: " + btnSEK + " kr");
     }
     if (msg.content === 'joke') {
         const response = await fetch("https://api.chucknorris.io/jokes/random");
