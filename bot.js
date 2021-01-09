@@ -26,22 +26,14 @@ client.on('message', async msg => {
     if (msg.content === "bitcoin") {
         const response = await fetch("https://min-api.cryptocompare.com/data/price?fsym=BTC&tsyms=USD");
         const currency = await response.json();
-        let btn = currency.USD;
-        msg.channel.send(btn)
+        let btnUS = currency.USD;
+        let btnSEK = currency.SEK;
+        msg.channel.send("US$ " + btnUS + document.write("\n") + "SEK: " + btnSEK + ":-");
     }
 });
 
-// bitcoin api https://min-api.cryptocompare.com/data/price?fsym=BTC&tsyms=USD,JPY,EUR
-
-// Random silly msgs for friends.
+// Random msg
 client.on('message', msg => {
-    if (msg.content === "bitcoin") {
-        msg.channel.send("failure");
-    }
-    if (msg.content === "!dejt") {
-        let specialGirl = boratsGirls[Math.floor(Math.random() * boratsGirls.length)];
-        msg.channel.send("Klart man har tjej, hon heter " + specialGirl + " och gillar åka i min fiat uno")
-    }
     if (msg.content === "!aktie") {
         let stockRandom = bullBear[Math.floor(Math.random() * bullBear.length)];
         msg.channel.send("köp " + stockRandom + ", den sitter 100%")
@@ -49,12 +41,6 @@ client.on('message', msg => {
     if (msg.content === "borat") {
         msg.channel.send("Va? vad säger du mitt namn för? jag är inte så intressant!")
     }
-    /*if (msg.content === "?chucknorris") {
-        var joke = JSON.parse(request.response).value.joke;
-        document.getElementById("joke").innerHTML = joke;
-        msg.channel.send(joke)
-    }
-*/
 })
 
 client.login(process.env.BOT_TOKEN)
