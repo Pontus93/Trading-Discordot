@@ -24,7 +24,7 @@ client.on("ready", () => {
 // Btn api.
 client.on('message', async msg => {
     if (msg.content === 'bitcoin') {
-        const response = await fetch("https://min-api.cryptocompare.com/data/price?fsym=BTC&tsyms=USD,JPY,EUR");
+        const response = await fetch("https://min-api.cryptocompare.com/data/price?fsym=BTC&tsyms=USD");
         const currency = await response.json();
         let btn = currency.value;
         msg.channel.send(btn)
