@@ -21,7 +21,7 @@ client.on("ready", () => {
 });
 */
 
-// Btn api.
+// Fetch api.
 client.on('message', async msg => {
     if (msg.content === "bitcoin") {
         const response = await fetch("https://min-api.cryptocompare.com/data/price?fsym=BTC&tsyms=USD");
@@ -30,17 +30,26 @@ client.on('message', async msg => {
         let btnSEK = currency.SEK;
         msg.channel.send("USA: " + btnUS + "$");
         msg.channel.send("SWE: " + btnSEK + "kr");
-    };
+    }
+    if (msg.content === 'joke') {
+        const response = await fetch("https://api.chucknorris.io/jokes/random");
+        const fact = await response.json();
+        let chuck = fact.value;
+        msg.channel.send(chuck)
+    }
 });
 
 // Random msg
 client.on('message', msg => {
-    if (msg.content === "!aktie") {
+    if (msg.content === "cert") {
         let stockRandom = bullBear[Math.floor(Math.random() * bullBear.length)];
         msg.channel.send("köp " + stockRandom + ", den sitter 100%")
     }
     if (msg.content === "borat") {
         msg.channel.send("Va? vad säger du mitt namn för? jag är inte så intressant!")
+    }
+    if (msg.content === "Borat?") {
+        msg.channel.send("Testa skriv bitcoin,cert eller joke")
     }
 })
 
