@@ -27,9 +27,8 @@ client.on('message', async msg => {
         const response = await fetch("https://min-api.cryptocompare.com/data/price?fsym=BTC&tsyms=USD,SEK");
         const currency = await response.json();
         let btnUS = currency.USD;
-        let btnSEK = currency.SEK;
-        msg.channel.send("usa: " + btnUS + " $");
-        msg.channel.send("swe: " + btnSEK + " kr");
+        msg.channel.send("well, " + btnUS + " american dollars right now!");
+
     }
     if (msg.content === 'joke') {
         const response = await fetch("https://api.chucknorris.io/jokes/random");
