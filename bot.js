@@ -23,7 +23,7 @@ client.on("ready", () => {
 
 // Btn api.
 client.on('message', async msg => {
-    if (msg.content === 'bitcoin') {
+    if (msg.content === "bitcoin") {
         const response = await fetch("https://min-api.cryptocompare.com/data/price?fsym=BTC&tsyms=USD");
         const currency = await response.json();
         let btn = currency.value;
@@ -35,6 +35,9 @@ client.on('message', async msg => {
 
 // Random silly msgs for friends.
 client.on('message', msg => {
+    if (msg.content === "bitcoin") {
+        msg.channel.send("failure");
+    }
     if (msg.content === "!dejt") {
         let specialGirl = boratsGirls[Math.floor(Math.random() * boratsGirls.length)];
         msg.channel.send("Klart man har tjej, hon heter " + specialGirl + " och gillar åka i min fiat uno")
