@@ -29,8 +29,10 @@ client.on('message', async msg => {
     if (msg.content === "tesla") {
         const response = await fetch("http://api.marketstack.com/v1/eod?access_key=d92442c09f4f474761ef7fb5d99bb9eb&symbols=TSLA");
         const fact = await response.json();
-        let tsla = fact.data.high;
+        let tsla = JSON.stringify(fact.data.high);
         msg.channel.send(tsla)
+
+
     }
 });
 
