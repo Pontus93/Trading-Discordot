@@ -15,7 +15,7 @@ async function scrapeProduct(url) {
     // Select by Xpath.
     const [el] = await page.$x('/html/body/div[2]/div/div[2]/div/div/div/div/div/div[2]/div/div[2]/div/div/div/div/div[2]/div/div/div[6]/span[2]');
     const txt = await el.getProperty('textContent');
-    const rawTxt = await txt.jsonValue();
+    rawTxt = await txt.jsonValue();
     console.log(rawTxt);
     browser.close();
 }
