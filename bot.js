@@ -16,7 +16,9 @@ async function scrapeProduct(url) {
     const [el] = await page.$x('/html/body/div[2]/div/div[2]/div/div/div/div/div/div[2]/div/div[2]/div/div/div/div/div[2]/div/div/div[6]/span[2]');
     const txt = await el.getProperty('textContent');
     rawTxt = await txt.jsonValue();
-    await msg.channel.send("Spectracure kurs: " + rawTxt + "kr");
+    client.on('message', msg => {
+        msg.channel.send(rawTxt + "kr just nu!");
+    });
     console.log(rawTxt);
     browser.close();
 }
