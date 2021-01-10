@@ -8,10 +8,6 @@ const fetch = require("node-fetch");
 const puppeteer = require('puppeteer');
 
 async function scrapeProduct(url) {
-    client.on('message', msg => {
-        msg.channel.send("Hämtar ytterligare data..");
-    });
-
     const browser = await puppeteer.launch();
     const page = await browser.newPage();
     await page.goto(url);
@@ -20,12 +16,10 @@ async function scrapeProduct(url) {
     const [el] = await page.$x('/html/body/div[2]/div/div[2]/div/div/div/div/div/div[2]/div/div[2]/div/div/div/div/div[2]/div/div/div[6]/span[2]');
     const txt = await el.getProperty('textContent');
     rawTxt = await txt.jsonValue();
-    client.on('message', msg => {
-        msg.channel.send(rawTxt + "kr just nu!");
-    });
     console.log(rawTxt);
     browser.close();
 }
+scrapeProduct('https://spectracure.se/');
 
 
 // Random bot msg.
@@ -62,8 +56,7 @@ client.on('message', async msg => {
     }
     if (msg.content === "spectracure") {
         msg.channel.send("Hämtar data..");
-        scrapeProduct('https://spectracure.se/');
-        msg.channel.send("end of scope");
+        msg.channel.send("Spectracurs kurs är: " + rawTxt + "kr");
     }
 });
 
