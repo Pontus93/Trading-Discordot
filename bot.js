@@ -3,8 +3,26 @@ require("dotenv").config()
 const Discord = require('discord.js')
 const client = new Discord.Client()
 const fetch = require("node-fetch");
-const bullBear = ["Bear-cert!", "Bull-cert!"]
 
+// WEB Scraping.
+const puppeteer = require('puppeteer');
+
+async function scrapeProduct(url) {
+    const browser = await puppeteer.launch();
+    const page = await browser.newPage();
+    await page.goto(url);
+
+    // Select by Xpath.
+    const [el] = await page.$x('/html/body/div[2]/div/div[2]/div/div/div/div/div/div[2]/div/div[2]/div/div/div/div/div[2]/div/div/div[6]/span[2]');
+    const txt = await el.getProperty('textContent');
+    const rawTxt = await txt.jsonValue();
+    console.log(rawTxt);
+    browser.close();
+}
+
+
+// Random bot msg.
+const bullBear = ["Bear-cert!", "Bull-cert!"]
 // Console.log when up and & running.
 client.on("ready", () => {
     console.log("The bot is up & running");
@@ -34,6 +52,10 @@ client.on('message', async msg => {
         const fact = await response.json();
         let chuck = fact.value;
         msg.channel.send(chuck)
+    }
+    if (msg.content === "spectracure") {
+        await scrapeProduct('https://spectracure.se/');
+        msg.channel.send("Spectracure kurs: " + rawTxt + "kr");
     }
 });
 
