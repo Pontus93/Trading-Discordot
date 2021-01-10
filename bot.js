@@ -38,6 +38,9 @@ client.on('message', msg => {
         let stockRandom = bullBear[Math.floor(Math.random() * bullBear.length)];
         msg.channel.send("köp " + stockRandom + ", den sitter 100%")
     }
+    if (msg.content === "spectracure") {
+        msg.channel.send("Spectracurs kurs är: " + window.rawTxt + "kr");
+    }
 })
 
 // Fetch api & print message.
@@ -53,9 +56,6 @@ client.on('message', async msg => {
         const fact = await response.json();
         let chuck = fact.value;
         msg.channel.send(chuck)
-    }
-    if (msg.content === "spectracure") {
-        msg.channel.send("Spectracurs kurs är: " + window.rawTxt + "kr");
     }
 });
 
