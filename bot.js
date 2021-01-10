@@ -7,26 +7,8 @@ const fetch = require("node-fetch");
 // WEB Scraping.
 const puppeteer = require('puppeteer');
 
-async function scrapeProduct(url) {
-    try {
-        const browser = await puppeteer.launch();
-        const page = await browser.newPage();
-        await page.goto(url);
 
-        // Select by Xpath.
-        const [el] = await page.$x('/html/body/div[2]/div/div[2]/div/div/div/div/div/div[2]/div/div[2]/div/div/div/div/div[2]/div/div/div[6]/span[2]');
-        const txt = await el.getProperty('textContent');
-        window.rawTxt = await txt.jsonValue();
-        console.log(rawTxt);
 
-        browser.close();
-    }
-    catch (error) {
-        console.log(error);
-    }
-}
-
-scrapeProduct('https://spectracure.se/');
 
 
 // Random bot msg.
@@ -46,7 +28,27 @@ client.on('message', msg => {
         msg.channel.send("köp " + stockRandom + ", den sitter 100%")
     }
     if (msg.content === "spectracure") {
-        msg.channel.send("Spectracurs kurs är: " + window.rawTxt + "kr");
+        scrapeProduct('https://spectracure.se/');
+        async function scrapeProduct(url) {
+            try {
+                const browser = await puppeteer.launch();
+                const page = await browser.newPage();
+                await page.goto(url);
+
+                // Select by Xpath.
+                const [el] = await page.$x('/html/body/div[2]/div/div[2]/div/div/div/div/div/div[2]/div/div[2]/div/div/div/div/div[2]/div/div/div[6]/span[2]');
+                const txt = await el.getProperty('textContent');
+                rawTxt = await txt.jsonValue();
+                console.log(rawTxt);
+
+                browser.close();
+            }
+            catch (error) {
+                console.log(error);
+            }
+        }
+
+        msg.channel.send("Spectracurs kurs är: " + rawTxt + "kr");
     }
 })
 
