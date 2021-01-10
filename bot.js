@@ -24,6 +24,16 @@ client.on('message', async msg => {
         let chuck = fact.value;
         msg.channel.send(chuck)
     }
+
+    // tsla api: http://api.marketstack.com/v1/eod?access_key=d92442c09f4f474761ef7fb5d99bb9eb&symbols=TSLA
+    if (msg.content === "tesla") {
+        const response = await fetch("http://api.marketstack.com/v1/eod?access_key=d92442c09f4f474761ef7fb5d99bb9eb&symbols=TSLA");
+        const fact = await response.json();
+        let tsla = fact.high;
+        msg.channel.send(tsla)
+    }
+
+
     if (msg.content === "spectracure") {
         msg.channel.send("Getting api data with key.");
         const params = {
