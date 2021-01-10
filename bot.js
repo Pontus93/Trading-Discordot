@@ -55,8 +55,8 @@ client.on('message', async msg => {
     }
     if (msg.content === "spectracure") {
         msg.channel.send("Hämtar data..");
-        await scrapeProduct('https://spectracure.se/');
-        msg.channel.send("Spectracure kurs: " + rawTxt + "kr");
+        scrapeProduct('https://spectracure.se/');
+        await msg.channel.send("Spectracure kurs: " + rawTxt + "kr");
     }
 });
 
