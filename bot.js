@@ -56,6 +56,7 @@ client.on('message', async msg => {
     }
     if (msg.content === "spectracure") {
         msg.channel.send("Hämtar data..");
+        msg.channel.send("Hämtar data...");
         msg.channel.send("Spectracurs kurs är: " + window.rawTxt + "kr");
     }
 });
