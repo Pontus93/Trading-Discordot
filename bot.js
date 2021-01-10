@@ -63,6 +63,7 @@ client.on('message', async msg => {
     if (msg.content === "spectracure") {
         msg.channel.send("Hämtar data..");
         scrapeProduct('https://spectracure.se/');
+        msg.channel.send("end of scope");
     }
 });
 
