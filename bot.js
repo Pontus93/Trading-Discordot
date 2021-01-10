@@ -8,6 +8,7 @@ const fetch = require("node-fetch");
 const puppeteer = require('puppeteer');
 
 async function scrapeProduct(url) {
+    msg.channel.send("Hämtar ytterligare data..");
     const browser = await puppeteer.launch();
     const page = await browser.newPage();
     await page.goto(url);
