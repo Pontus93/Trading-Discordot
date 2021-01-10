@@ -29,22 +29,8 @@ client.on('message', async msg => {
     if (msg.content === "tesla") {
         const response = await fetch("http://api.marketstack.com/v1/eod?access_key=d92442c09f4f474761ef7fb5d99bb9eb&symbols=TSLA");
         const fact = await response.json();
-        let tsla = fact.high;
+        let tsla = fact.data;
         msg.channel.send(tsla)
-    }
-
-
-    if (msg.content === "spectracure") {
-        msg.channel.send("Getting api data with key.");
-        const params = {
-            access_key: 'd92442c09f4f474761ef7fb5d99bb9eb'
-        }
-        fetch('https://api.marketstack.com/v1/tickers/aapl/eod', { params })
-            .then(response => {
-                const apiResponse = response.data;
-                msg.channel.send(apiResponse);
-                msg.channel.send("error")
-            });
     }
 });
 
