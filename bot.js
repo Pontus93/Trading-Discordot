@@ -27,7 +27,7 @@ client.on('message', async msg => {
     if (msg.content === "spectracure") {
         const axios = require('axios');
         const params = {
-            access_key: 'YOUR_ACCESS_KEY'
+            access_key: 'd92442c09f4f474761ef7fb5d99bb9eb'
         }
         axios.get('https://api.marketstack.com/v1/tickers/aapl/eod', { params })
             .then(response => {
