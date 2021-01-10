@@ -33,6 +33,7 @@ client.on('message', async msg => {
             .then(response => {
                 const apiResponse = response.data;
                 msg.channel.send(apiResponse);
+                msg.channel.send("error")
             });
     }
 });
