@@ -25,11 +25,11 @@ client.on('message', async msg => {
         msg.channel.send(chuck)
     }
     if (msg.content === "spectracure") {
-        const axios = require('axios');
+        msg.channel.send("Getting api data with key.");
         const params = {
             access_key: 'd92442c09f4f474761ef7fb5d99bb9eb'
         }
-        axios.get('https://api.marketstack.com/v1/tickers/aapl/eod', { params })
+        fetch('https://api.marketstack.com/v1/tickers/aapl/eod', { params })
             .then(response => {
                 const apiResponse = response.data;
                 msg.channel.send(apiResponse);
