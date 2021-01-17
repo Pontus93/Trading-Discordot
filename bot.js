@@ -90,7 +90,7 @@ client.on('message', async msg => {
         }
         catch (error) {
             console.log(error);
-            msg.channel.send("something wrong with the WebScraper please contact my creator");
+            msg.channel.send("something wrong with the WebScraper please contact my creator.");
         }
         msg.channel.send("Nuvarande kurs: " + StockValue + "kr");
         msg.channel.send("Utveckling idag är: " + dailyProgressValue + "%");
