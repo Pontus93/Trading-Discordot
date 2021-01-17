@@ -57,8 +57,13 @@ client.on('message', async msg => {
     async function scrapeProduct(url) {
         try {
             const browser = await puppeteer.launch({
+                headless: true,
+                defaultViewport: null,
                 args: [
+                    '--incognito',
                     '--no-sandbox',
+                    '--single-process',
+                    '--no-zygote',
                     '--disable-setuid-sandbox'
                 ]
             });
