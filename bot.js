@@ -59,13 +59,7 @@ client.on('message', async msg => {
             const browser = await puppeteer.launch({
                 headless: true,
                 defaultViewport: null,
-                args: [
-                    '--incognito',
-                    '--no-sandbox',
-                    '--single-process',
-                    '--no-zygote',
-                    '--disable-setuid-sandbox'
-                ]
+                args: ["--no-sandbox"]
             });
             const page = await browser.newPage();
             await page.goto(url);
@@ -87,6 +81,7 @@ client.on('message', async msg => {
             dailyProgressValue = await dailyProgress.jsonValue();
 
             browser.close();
+
         }
         catch (error) {
             console.log(error);
