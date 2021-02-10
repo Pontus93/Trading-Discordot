@@ -18,15 +18,37 @@ client.on("ready", () => {
 client.on('message', msg => {
     if (msg.content === "borat") {
         msg.channel.send("Testa skriv bitcoin,trading eller joke.");
-        msg.channel.send("Du kan även skriva spectracure,prolight eller sinch.");
+        msg.channel.send("Du kan även skriva spectracure,sinch,tesla eller aktier för att kolla aktielistan.");
         msg.channel.send("Vill du lägga till fler? skriv till raketpontan.");
     }
     if (msg.content === "trading") {
         let stockRandom = bullBear[Math.floor(Math.random() * bullBear.length)];
-        msg.channel.send("Idag kommer du " + stockRandom + " pengar på börsen.")
+        msg.channel.send("Idag kommer du " + stockRandom + " pengar på börsen.");
     }
-    // WebScraper for Stocks.
-
+    if (msg.content === "clemondo") {
+        msg.channel.send("den jävla aktien skiter Borat i..");
+    }
+    if (msg.content === "aktier") {
+        msg.channel.send("BoratTheBots aktie-information!");
+        msg.channel.send("Svenska Aktier:");
+        msg.channel.send("spectracure.");
+        msg.channel.send("sinch.");
+        msg.channel.send("prolight.");
+        msg.channel.send("ericsson.");
+        msg.channel.send("kinnevik.");
+        msg.channel.send("thinfilm.");
+        msg.channel.send("hemcheck.");
+        msg.channel.send("nokia.");
+        msg.channel.send("topright.");
+        msg.channel.send("shamaran.");
+        msg.channel.send("-----------------------------------------");
+        msg.channel.send("Amerikanska Aktier:");
+        msg.channel.send("mtg.");
+        msg.channel.send("tesla.");
+        msg.channel.send("airbnb.");
+        msg.channel.send("fortinet.");
+        msg.channel.send("kla.");
+    }
 })
 
 // Fetch api/stockValue/bitcoinValue & prints message.
@@ -46,14 +68,59 @@ client.on('message', async msg => {
     if (msg.content === "spectracure") {
         scrapeProduct('https://www.avanza.se/aktier/om-aktien.html/574898/spectracure');
     }
+    if (msg.content === "hemcheck") {
+        scrapeProduct('https://www.avanza.se/aktier/om-aktien.html/739019/hemcheck-sweden');
+    }
+
+    if (msg.content === "nokia") {
+        scrapeProduct('https://www.avanza.se/aktier/om-aktien.html/82987/nokia-oyj');
+    }
     if (msg.content === "sinch") {
         scrapeProduct('https://www.avanza.se/aktier/om-aktien.html/599956/sinch');
+        msg.channel.send("Borats Riktkurs: 800kr");
+        msg.channel.send("rekommendation: sälj.")
     }
     if (msg.content === "prolight") {
-        scrapeProduct('https://www.avanza.se/aktier/om-aktien.html/741528/prolight-diagnostics')
+        scrapeProduct('https://www.avanza.se/aktier/om-aktien.html/741528/prolight-diagnostics');
+        msg.channel.send("Årets jävla raket, rekommendation att sälja hus,fru,barn,villa & röven för att pumpa in cash!");
     }
-    if (msg.content === "aktie") {
+
+    if (msg.content === "topright") {
+        scrapeProduct('https://www.avanza.se/aktier/om-aktien.html/811372/topright-nordic');
     }
+
+    if (msg.content === "shamaran") {
+        scrapeProduct('https://www.avanza.se/aktier/om-aktien.html/299178/shamaran-petroleum-corp');
+    }
+
+    if (msg.content === "ericsson") {
+        scrapeProduct('https://www.avanza.se/aktier/om-aktien.html/5240/ericsson-b');
+    }
+    if (msg.content === "mtg") {
+        scrapeProduct('https://www.avanza.se/aktier/om-aktien.html/5438/modern-times-group-b');
+    }
+    if (msg.content === "kinnevik") {
+        scrapeProduct('https://www.avanza.se/aktier/om-aktien.html/5369/kinnevik-b');
+    }
+    if (msg.content === "thinfilm") {
+        scrapeProduct('https://www.avanza.se/aktier/om-aktien.html/111916/thin-film-electronics');
+    }
+    if (msg.content === "nio") {
+        scrapeProduct('https://www.avanza.se/aktier/om-aktien.html/881354/nio-inc');
+    }
+    if (msg.content === "tesla") {
+        scrapeProduct('https://www.avanza.se/aktier/om-aktien.html/238449/tesla-inc');
+    }
+    if (msg.content === "fortinet") {
+        scrapeProduct('https://www.avanza.se/aktier/om-aktien.html/242850/fortinet-inc');
+    }
+    if (msg.content === "kla") {
+        scrapeProduct('https://www.avanza.se/aktier/om-aktien.html/3844/kla-corp');
+    }
+    if (msg.content === "airbnb") {
+        scrapeProduct('https://www.avanza.se/aktier/om-aktien.html/1163096/airbnb-inc');
+    }
+
     async function scrapeProduct(url) {
         try {
             const browser = await puppeteer.launch({
@@ -95,4 +162,4 @@ client.on('message', async msg => {
     }
 });
 
-client.login(process.env.BOT_TOKEN)
+client.login(process.env.BOT_TOKEN);
