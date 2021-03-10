@@ -21,7 +21,6 @@ client.on('message', msg => {
     }
 })
 
-
 // Fetch api/stockValue/bitcoinValue & prints message.
 client.on('message', async msg => {
 
@@ -46,7 +45,7 @@ client.on('message', async msg => {
     // The list of stocks available for scraping.
     if (msg.content === "aktier") {
         msg.channel.send("Svenska aktier redo att hämta data från");
-        msg.channel.send("spectracure,hemcheck,nokia,sinch,prolight,shamaran,ericsson,mtg,kinnevik,thinfilm");
+        msg.channel.send("spectracure,hemcheck,nokia,sinch,prolight,shamaran,ericsson,mtg,kinnevik,thinfilm,topright");
         msg.channel.send("Amerikanska aktier redo att hämta data från");
         msg.channel.send("nio,tesla,fortinet,kla,airbnb");
     }
@@ -62,6 +61,7 @@ client.on('message', async msg => {
     if (msg.content === "mtg") { scrapeProduct('https://www.avanza.se/aktier/om-aktien.html/5438/modern-times-group-b'); }
     if (msg.content === "kinnevik") { scrapeProduct('https://www.avanza.se/aktier/om-aktien.html/5369/kinnevik-b'); }
     if (msg.content === "thinfilm") { scrapeProduct('https://www.avanza.se/aktier/om-aktien.html/111916/thin-film-electronics'); }
+    if (msg.content === "topright") { scrapeProduct('https://www.avanza.se/aktier/om-aktien.html/811372/topright-nordic'); }
 
     // American stocks.
     if (msg.content === "nio") { scrapeProduct('https://www.avanza.se/aktier/om-aktien.html/881354/nio-inc'); }
@@ -103,6 +103,7 @@ client.on('message', async msg => {
             msg.channel.send("something wrong with the WebScraper please contact my creator.");
         }
     }
+
     // The scrapingFunction for stocks.
     async function scrapeProduct(url) {
         try {
