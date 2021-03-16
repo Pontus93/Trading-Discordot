@@ -62,7 +62,7 @@ client.on('message', async msg => {
     if (msg.content === "kinnevik") { scrapeProduct('https://www.avanza.se/aktier/om-aktien.html/5369/kinnevik-b'); }
     if (msg.content === "thinfilm") { scrapeProduct('https://www.avanza.se/aktier/om-aktien.html/111916/thin-film-electronics'); }
     if (msg.content === "topright") { scrapeProduct('https://www.avanza.se/aktier/om-aktien.html/811372/topright-nordic'); }
-
+    if (msg.content === "investor") { scrapeProduct('https://www.avanza.se/aktier/om-aktien.html/5247/investor-b'); }
     // American stocks.
     if (msg.content === "nio") { scrapeProduct('https://www.avanza.se/aktier/om-aktien.html/881354/nio-inc'); }
     if (msg.content === "tesla") { scrapeProduct('https://www.avanza.se/aktier/om-aktien.html/238449/tesla-inc'); }
@@ -131,7 +131,7 @@ client.on('message', async msg => {
             yearlyProgressValue = await yearlyProgress.jsonValue();
             dailyProgressValue = await dailyProgress.jsonValue();
             msg.channel.send("Nuvarande kurs: " + StockValue + "kr");
-            msg.channel.send("Utveckling idag är: " + dailyProgressValue + "%");
+            msg.channel.send("Utveckling idag är: " + dailyProgressValue);
             msg.channel.send("Omsättning idag: " + revenueValue + "kr");
             msg.channel.send("Utveckling i år: " + yearlyProgressValue + "%");
             msg.channel.send("-----------------------------------------");
@@ -145,4 +145,3 @@ client.on('message', async msg => {
 });
 
 client.login(process.env.BOT_TOKEN);
-
