@@ -34,6 +34,7 @@ client.on('message', async msg => {
 
     // The bot will write brentOilPrice in US$.
     if (msg.content === "oilprice") { ScrapeOil('https://www.avanza.se/index/om-indexet.html/155722/olja') };
+
     // The bot will throw a ChuckNorris joke upon us.
     if (msg.content === "joke") {
         const response = await fetch("https://api.chucknorris.io/jokes/random");
@@ -63,6 +64,7 @@ client.on('message', async msg => {
     if (msg.content === "thinfilm") { scrapeProduct('https://www.avanza.se/aktier/om-aktien.html/111916/thin-film-electronics'); }
     if (msg.content === "topright") { scrapeProduct('https://www.avanza.se/aktier/om-aktien.html/811372/topright-nordic'); }
     if (msg.content === "investor") { scrapeProduct('https://www.avanza.se/aktier/om-aktien.html/5247/investor-b'); }
+
     // American stocks.
     if (msg.content === "nio") { scrapeProduct('https://www.avanza.se/aktier/om-aktien.html/881354/nio-inc'); }
     if (msg.content === "tesla") { scrapeProduct('https://www.avanza.se/aktier/om-aktien.html/238449/tesla-inc'); }
@@ -136,6 +138,67 @@ client.on('message', async msg => {
             msg.channel.send("Utveckling i år: " + yearlyProgressValue + "%");
             msg.channel.send("-----------------------------------------");
             browser.close();
+        }
+        catch (error) {
+            console.log(error);
+            msg.channel.send("something wrong with the WebScraper please contact my creator.");
+        }
+    }
+
+
+    // Start scrapingInsiderBuissnes with interval of 1minute.
+    if (msg.content === "insider") {
+        setInterval(function () {
+            scrapeInsiderBuy('https://marknadssok.fi.se/Publiceringsklient/sv-SE/Search/Search?SearchFunctionType=Insyn&Utgivare=prolight&PersonILedandeSt%C3%A4llningNamn=&Transaktionsdatum.From=&Transaktionsdatum.To=&Publiceringsdatum.From=&Publiceringsdatum.To=&button=search&Page=1', '2019-09-30');
+            scrapeInsiderBuy('https://marknadssok.fi.se/Publiceringsklient/sv-SE/Search/Search?SearchFunctionType=Insyn&Utgivare=spectracure&PersonILedandeSt%C3%A4llningNamn=&Transaktionsdatum.From=&Transaktionsdatum.To=&Publiceringsdatum.From=&Publiceringsdatum.To=&button=search&Page=1', '2020-06-25');
+        }, 60 * 1000);
+    }
+
+    // The scrapingFunction for insiderBuy.
+    async function scrapeInsiderBuy(url, date) {
+        try {
+            const browser = await puppeteer.launch({
+                headless: true,
+                defaultViewport: null,
+                args: ["--no-sandbox"]
+            });
+            const page = await browser.newPage();
+            await page.goto(url);
+
+            // Select by Xpath.
+            const [currentDateLive] = await page.$x('//*[@id="grid-list"]/div[1]/div/table/tbody/tr[1]/td[1]');
+            const [currentInsider] = await page.$x('//*[@id="grid-list"]/div[1]/div/table/tbody/tr[1]/td[3]');
+            const [buyorSellOption] = await page.$x('//*[@id="grid-list"]/div[1]/div/table/tbody/tr[1]/td[6]');
+            const [amountOfShares] = await page.$x('//*[@id="grid-list"]/div[1]/div/table/tbody/tr[1]/td[10]');
+            const [companyNameLive] = await page.$x('//*[@id="grid-list"]/div[1]/div/table/tbody/tr[1]/td[2]');
+
+            const currentDate = await currentDateLive.getProperty('textContent');
+            const currentInsiderPerson = await currentInsider.getProperty('textContent');
+            const buyorSellData = await buyorSellOption.getProperty('textContent');
+            const shareAmount = await amountOfShares.getProperty('textContent');
+            const companyName = await companyNameLive.getProperty('textContent');
+
+            dateValue = await currentDate.jsonValue();
+            insiderPersonValue = await currentInsiderPerson.jsonValue();
+            buyorSellValue = await buyorSellData.jsonValue();
+            shareAmountValue = await shareAmount.jsonValue();
+            companyNameValue = await companyName.jsonValue();
+
+            if (dateValue !== date) {
+                msg.channel.send("Bolag: " + companyNameValue);
+                msg.channel.send("Typ av Köp: " + buyorSellValue);
+                msg.channel.send("Datum: " + StockValue);
+                msg.channel.send("Insiderperson: " + insiderPersonValue);
+                msg.channel.send("Antal aktier: " + shareAmountValue);
+                msg.channel.send("-----------------------------------------");
+                browser.close();
+            } else {
+                var date = new Date();
+                let hour = date.getHours();
+                let minute = date.getMinutes();
+                console.log("Inga insiderköp: " + companyNameValue + " klockan: " + hour + ":" + minute);
+
+            }
         }
         catch (error) {
             console.log(error);
